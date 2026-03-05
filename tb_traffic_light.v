@@ -13,17 +13,15 @@ traffic_light_controller uut(
 // clock generation
 always #5 clk = ~clk;
 
-initial
-begin
-    clk = 0;   // initialize clock
+initial begin
+    clk = 0;
 end
 
-initial
-begin
-    $monitor("Time=%0t Light=%b", $time, light);
+initial begin
+    $display("Starting Simulation...");
+    $monitor("Time=%0t  Light=%b", $time, light);
 
     reset = 1;
-
     #10 reset = 0;
 
     #100 $finish;
