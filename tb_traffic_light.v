@@ -14,6 +14,7 @@ always #5 clk = ~clk;
 
 initial
 begin
+     $monitor("Time=%0t Light=%b", $time, light);
     clk = 0;
     reset = 1;
 
