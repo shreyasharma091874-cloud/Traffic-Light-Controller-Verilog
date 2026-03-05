@@ -1,0 +1,41 @@
+module traffic_light_controller(
+    input clk,
+    input reset,
+    output reg [2:0] light
+);
+
+parameter GREEN = 2'b00;
+parameter YELLOW = 2'b01;
+parameter RED = 2'b10;
+
+reg [1:0] state, next_state;
+
+always @(posedge clk or posedge reset)
+begin
+    if(reset)
+        state <= GREEN;
+    else
+        state <= next_state;
+end
+
+always @(*)
+begin
+    case(state)
+        GREEN: next_state = YELLOW;
+        YELLOW: next_state = RED;
+        RED: next_state = GREEN;
+        default: next_state = GREEN;
+    endcase
+end
+
+always @(*)
+begin
+    case(state)
+        GREEN: light = 3'b001;
+        YELLOW: light = 3'b010;
+        RED: light = 3'b100;
+        default: light = 3'b000;
+    endcase
+end
+
+endmodule
